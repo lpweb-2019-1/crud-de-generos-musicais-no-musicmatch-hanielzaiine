@@ -1,0 +1,60 @@
+<section>
+  <h1 class="mb-4 mt-5 border-bottom">Pesquisa</h1>
+  <p>Utilize entrada de texto a seguir para realizar a pesquisa de músicas, artistas e gêneros musicais.</p>
+  <form (submit)="pesquisar()">
+    <div class="input-group">
+      <input type="text" id="busca" name="busca" class="form-control form-control-lg" [(ngModel)]="busca">
+      <div class="input-group-append">
+        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+  </form>
+  <div class="mt-4" *ngIf="lista">
+    <h4>Artistas</h4>
+    <div class="list-group" *ngIf="lista.artistas">
+      <a *ngFor="let item of lista.artistas" [routerLink]="['/artistas', item.id]"
+        class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><i class="fas fa-user"></i> {{item.nome}}</h5>
+        </div>
+      </a>
+    </div>
+    <div *ngIf="lista.artistas.length == 0" class="list-group-item list-group-item-warning">
+      <div>
+        <i class="fas fa-exclamation-circle"></i> Nenhum artista encontrado.
+      </div>
+    </div>
+
+    <h4 class="mt-4">Gêneros</h4>
+    <div class="list-group">
+      <a *ngFor="let item of lista.generos" [routerLink]="['/generos', item.id]"
+        class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><i class="fas fa-tag"></i> {{item.nome}}</h5>
+        </div>
+      </a>
+    </div>
+    <div *ngIf="lista.generos.length == 0" class="list-group-item list-group-item-warning">
+      <div>
+        <i class="fas fa-exclamation-circle"></i> Nenhum gênero encontrado.
+      </div>
+    </div>
+
+
+    <h4 class="mt-4">Músicas</h4>
+    <div class="list-group">
+      <a *ngFor="let item of lista.musicas" [routerLink]="['/musicas', item.id]"
+        class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><i class="fas fa-music"></i> {{item.titulo}}</h5>
+        </div>
+      </a>
+    </div>
+    <div *ngIf="lista.musicas.length == 0" class="list-group-item list-group-item-warning">
+      <div>
+        <i class="fas fa-exclamation-circle"></i> Nenhuma música encontrada.
+      </div>
+    </div>
+
+  </div>
+</section>
